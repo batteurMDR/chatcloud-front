@@ -1,6 +1,7 @@
 import * as io from 'socket.io-client';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ConfigService } from './config.service';
 
 export interface Message {
   username: string;
@@ -11,7 +12,7 @@ export interface Message {
   providedIn: 'root'
 })
 export class ChatService {
-  private _url = 'localhost:3000';// process.env.SOCKET_URL || 'http://localhost:8080';
+  private _url = 'localhost:3000'; // default value
   private _socket: io.Socket;
 
   private _messages = new BehaviorSubject<Message[]>([]);
@@ -20,7 +21,8 @@ export class ChatService {
 
   public loggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor() {
+  constructor(private configService: ConfigService) {
+    this._url = configService.config.socketUrl;
     this._socket = io.io(this._url);
     this._listen();
   }

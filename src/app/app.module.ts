@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +9,8 @@ import { InputComponent } from './components/input/input.component';
 import { TypingComponent } from './components/typing/typing.component';
 import { ChatComponent } from './chat/chat.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfigService } from './services/config.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,18 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (config: ConfigService) => () => config.init(),
+      deps: [ConfigService],
+      multi: true
+    },
+    ConfigService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
