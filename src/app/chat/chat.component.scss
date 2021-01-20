@@ -1,0 +1,60 @@
+app-users {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 15vw;
+}
+
+app-messages {
+    position: absolute;
+    top: 0;
+    left: 15vw;
+    bottom: 15vh;
+    right: 0;
+}
+
+app-typing {
+    position: absolute;
+    left: 15vw;
+    bottom: 8vh;
+    right: 0;
+    height: 7vh;
+}
+
+app-input {
+    position: absolute;
+    left: 15vw;
+    bottom: 0;
+    right: 0;
+    height: 8vh;
+}
+
+.login {
+    position: absolute;
+    background-color: #000;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    input {
+        border: none;
+        padding: 5px 10px;
+        border-radius: 2px;
+        outline: none;
+    }
+
+    .btn {
+        margin-top: 1em;
+        background-color: #fff;
+        color: #000;
+        padding: .8em 1.8em;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}

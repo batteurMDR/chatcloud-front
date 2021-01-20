@@ -1,0 +1,9 @@
+<div class="input">
+    <input
+        [formControl]="message"
+        placeholder="Votre message"
+        (focus)="inputFocus()"
+        (blur)="inputBlur()"
+        (keyup.enter)="send()" />
+    <div (click)="send()" class="btn">Send</div>
+</div>

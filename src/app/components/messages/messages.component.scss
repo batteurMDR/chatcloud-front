@@ -1,0 +1,23 @@
+h3 {
+    margin-left: .8em;
+}
+.messages {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 1em .8em;
+
+    .message {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        margin: 1em 0;
+
+        .username {
+            font-weight: bold;
+        }
+    }
+}

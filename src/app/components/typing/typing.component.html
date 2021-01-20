@@ -1,0 +1,5 @@
+<div class="typings">
+    <span *ngFor="let typing of typings" class="username">{{typing}}, </span>
+    <span *ngIf="typings.length === 1">is typing...</span>
+    <span *ngIf="typings.length > 1">are typings...</span>
+</div>

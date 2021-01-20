@@ -1,0 +1,6 @@
+<h3>Conversation</h3>
+<div class="messages" #messagesElement>
+    <div *ngFor="let message of messages" class="message">
+        <span class="username">{{message.username}}</span>{{message.message}}
+    </div>
+</div>
