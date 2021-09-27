@@ -6,6 +6,12 @@ import { ConfigService } from './config.service';
 export interface Message {
   username: string;
   message: string;
+  score: number;
+}
+
+export interface UserScore {
+  username: string;
+  generalScore: number;
 }
 
 @Injectable({
@@ -18,6 +24,7 @@ export class ChatService {
   private _messages = new BehaviorSubject<Message[]>([]);
   private _users = new BehaviorSubject<string[]>([]);
   private _typings = new BehaviorSubject<string[]>([]);
+  private _generalScore = new BehaviorSubject<UserScore[]>([]);
 
   public loggedIn = new BehaviorSubject<boolean>(false);
 
@@ -39,6 +46,10 @@ export class ChatService {
     return this._typings;
   }
 
+  public getGeneralScore() {
+    return this._generalScore;
+  }
+
   public login(username: string): void {
     this._socket.emit('add user', username);
   }
@@ -58,6 +69,7 @@ export class ChatService {
   private _listen(): void {
     this._socket.on('new message', (message: Message) => {
       this._messages.next([...this._messages.value, message]);
+      console.log(message);
     });
     this._socket.on('login', (usernames: string[]) => {
       this._users.next(usernames);
@@ -78,6 +90,10 @@ export class ChatService {
     this._socket.on('user left', (username: string) => {
       this._users.next([...this._users.value.filter((u) => u !== username)]);
     });
+    this._socket.on('general score', (user: UserScore) => {
+      console.log(user);
+      this._generalScore.next([user]);
+    })
   }
 
 }

@@ -9,6 +9,7 @@ import { ChatService } from 'src/app/services/chat.service';
 })
 export class UsersComponent implements OnInit, OnDestroy {
   public users: string[] = [];
+  public generalScore: number = 0;
 
   private subscribes = new Subscription();
 
@@ -17,6 +18,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscribes.add(this._chatService.getUsers().subscribe((users) => {
       this.users = users;
+    }));
+
+    this.subscribes.add(this._chatService.getGeneralScore().subscribe((score) => {
+      this.generalScore = score[0].generalScore;
     }));
   }
 
