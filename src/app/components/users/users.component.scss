@@ -12,8 +12,17 @@
         justify-content: space-between;
         align-items: center;
 
-        .username, .generalScore {
+        .username {
             font-weight: bold;
+        }
+
+        .is-me {
+            color: #39796b;
+        }
+
+        .generalScore {
+            font-weight: inherit;
+            color: #002f6c;
         }
     }
 }

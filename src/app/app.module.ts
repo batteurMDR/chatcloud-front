@@ -8,6 +8,8 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { InputComponent } from './components/input/input.component';
 import { TypingComponent } from './components/typing/typing.component';
 import { ChatComponent } from './chat/chat.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { LoaderService } from './services/loader.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigService } from './services/config.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     MessagesComponent,
     InputComponent,
     TypingComponent,
-    ChatComponent
+    ChatComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http';
       deps: [ConfigService],
       multi: true
     },
-    ConfigService
+    ConfigService,
+    LoaderService
   ],
   bootstrap: [AppComponent]
 })

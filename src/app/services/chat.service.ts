@@ -9,9 +9,10 @@ export interface Message {
   score: number;
 }
 
-export interface UserScore {
+export interface User {
+  id: number;
   username: string;
-  generalScore: number;
+  score: number;
 }
 
 @Injectable({
@@ -22,11 +23,11 @@ export class ChatService {
   private _socket: io.Socket;
 
   private _messages = new BehaviorSubject<Message[]>([]);
-  private _users = new BehaviorSubject<string[]>([]);
+  private _users = new BehaviorSubject<User[]>([]);
   private _typings = new BehaviorSubject<string[]>([]);
-  private _generalScore = new BehaviorSubject<UserScore[]>([]);
 
   public loggedIn = new BehaviorSubject<boolean>(false);
+  public me = null;
 
   constructor(private configService: ConfigService) {
     this._url = configService.config.socketUrl;
@@ -46,11 +47,8 @@ export class ChatService {
     return this._typings;
   }
 
-  public getGeneralScore() {
-    return this._generalScore;
-  }
-
   public login(username: string): void {
+    this.me = username;
     this._socket.emit('add user', username);
   }
 
@@ -69,14 +67,13 @@ export class ChatService {
   private _listen(): void {
     this._socket.on('new message', (message: Message) => {
       this._messages.next([...this._messages.value, message]);
-      console.log(message);
     });
-    this._socket.on('login', (usernames: string[]) => {
-      this._users.next(usernames);
+    this._socket.on('login', (users: User[]) => {
+      this._users.next(users);
       this.loggedIn.next(true);
     });
-    this._socket.on('user joined', (username: string) => {
-      this._users.next([...this._users.value, username]);
+    this._socket.on('user joined', (user: User) => {
+      this._users.next([...this._users.value, user]);
     });
     this._socket.on('previous messages', (messages: Message[]) => {
       this._messages.next(messages);
@@ -88,11 +85,12 @@ export class ChatService {
       this._typings.next([...this._typings.value.filter((t) => t !== username)]);
     });
     this._socket.on('user left', (username: string) => {
-      this._users.next([...this._users.value.filter((u) => u !== username)]);
+      this._users.next([...this._users.value.filter((u) => u.username !== username)]);
     });
-    this._socket.on('general score', (user: UserScore) => {
-      console.log(user);
-      this._generalScore.next([user]);
+    this._socket.on('update user score', (user: User) => {
+      this._users.next([
+        ...this._users.value.map((u) => u.username !== user.username ? u : {...u, score: user.score})
+      ]);
     })
   }
 

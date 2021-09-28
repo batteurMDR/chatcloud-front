@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ChatService } from 'src/app/services/chat.service';
+import { ChatService, User } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-users',
@@ -8,8 +8,8 @@ import { ChatService } from 'src/app/services/chat.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit, OnDestroy {
-  public users: string[] = [];
-  public generalScore: number = 0;
+  public myUsername = '';
+  public users: User[] = [];
 
   private subscribes = new Subscription();
 
@@ -19,10 +19,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.subscribes.add(this._chatService.getUsers().subscribe((users) => {
       this.users = users;
     }));
-
-    this.subscribes.add(this._chatService.getGeneralScore().subscribe((score) => {
-      this.generalScore = score[0].generalScore;
-    }));
+    this.myUsername = this._chatService.me;
   }
 
   ngOnDestroy(): void {
