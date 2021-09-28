@@ -7,11 +7,7 @@
 </ng-container>
 <ng-container *ngIf="!isLoggedIn">
     <div class="login">
-        <input
-            type="text"
-            [formControl]="username"
-            placeholder="Nom d'utilisateur"
-            (keyup.enter)="login()" />
+        <input type="text" [formControl]="username" placeholder="Nom d'utilisateur" (keyup.enter)="login()" />
         <div (click)="login()" class="btn">Connexion</div>
     </div>
 </ng-container>

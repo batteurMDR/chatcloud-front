@@ -1,10 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
-body, html {
+body,
+html {
     margin: 0;
     border: 0;
     padding: 0;

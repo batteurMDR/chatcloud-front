@@ -4,36 +4,38 @@ import { ChatService, Message } from 'src/app/services/chat.service';
 import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
-  selector: 'app-messages',
-  templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.scss']
+    selector: 'app-messages',
+    templateUrl: './messages.component.html',
+    styleUrls: ['./messages.component.scss'],
 })
 export class MessagesComponent implements OnInit, AfterViewChecked, OnDestroy {
-  @ViewChild('messagesElement', {static: false}) messagesElement: ElementRef<HTMLDivElement>;
+    @ViewChild('messagesElement', { static: false }) messagesElement: ElementRef<HTMLDivElement>;
 
-  public myUsername = '';
-  public messages: Message[] = [];
-  private subscribes = new Subscription();
+    public myUsername = '';
+    public messages: Message[] = [];
+    private subscribes = new Subscription();
 
-  constructor(private _chatService: ChatService, private _loaderService: LoaderService) { }
+    constructor(private _chatService: ChatService, private _loaderService: LoaderService) {}
 
-  ngAfterViewChecked(): void {
-    if (this.messagesElement) {
-      this.messagesElement.nativeElement.scroll({
-        top: this.messagesElement.nativeElement.scrollHeight
-      })
+    ngAfterViewChecked(): void {
+        if (this.messagesElement) {
+            this.messagesElement.nativeElement.scroll({
+                top: this.messagesElement.nativeElement.scrollHeight,
+            });
+        }
     }
-  }
 
-  ngOnInit(): void {
-    this.subscribes.add(this._chatService.getMessages().subscribe((messages) => {
-      this.messages = messages;
-      this._loaderService.hideLoader();
-    }));
-    this.myUsername = this._chatService.me;
-  }
+    ngOnInit(): void {
+        this.subscribes.add(
+            this._chatService.getMessages().subscribe((messages) => {
+                this.messages = messages;
+                this._loaderService.hideLoader();
+            })
+        );
+        this.myUsername = this._chatService.me;
+    }
 
-  ngOnDestroy(): void {
-    this.subscribes.unsubscribe();
-  }
+    ngOnDestroy(): void {
+        this.subscribes.unsubscribe();
+    }
 }

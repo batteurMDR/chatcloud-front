@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface IConfig {
+export interface IConfig {
     socketUrl: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class ConfigService {
     private _config: IConfig;
@@ -19,8 +19,8 @@ export class ConfigService {
         return new Promise((resolve, reject) => {
             const envConfig: Observable<Object> = this.http.get(this._envConfigUrl, {
                 params: {
-                    v: String(Math.round(new Date().getTime() / 3600000) * 3600000)
-                }
+                    v: String(Math.round(new Date().getTime() / 3600000) * 3600000),
+                },
             });
 
             envConfig.subscribe((content: IConfig) => {
@@ -29,9 +29,8 @@ export class ConfigService {
             });
         });
     }
-    
+
     get config(): IConfig {
         return this._config;
     }
-
 }

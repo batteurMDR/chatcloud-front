@@ -15,31 +15,26 @@ import { ConfigService } from './services/config.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UsersComponent,
-    MessagesComponent,
-    InputComponent,
-    TypingComponent,
-    ChatComponent,
-    LoaderComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (config: ConfigService) => () => config.init(),
-      deps: [ConfigService],
-      multi: true
-    },
-    ConfigService,
-    LoaderService
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        UsersComponent,
+        MessagesComponent,
+        InputComponent,
+        TypingComponent,
+        ChatComponent,
+        LoaderComponent,
+    ],
+    imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
+    providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: (config: ConfigService) => () => config.init(),
+            deps: [ConfigService],
+            multi: true,
+        },
+        ConfigService,
+        LoaderService,
+    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

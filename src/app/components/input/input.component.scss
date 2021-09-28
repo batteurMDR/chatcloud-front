@@ -5,19 +5,19 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding-left: .8em;
+    padding-left: 0.8em;
     border-top: 1px solid #000;
 
     input {
         width: 80%;
-        padding: .8em;
+        padding: 0.8em;
     }
 
     .btn {
         margin: 0 1em;
         background-color: #000;
         color: #fff;
-        padding: .8em 1.8em;
+        padding: 0.8em 1.8em;
         font-weight: bold;
         cursor: pointer;
     }

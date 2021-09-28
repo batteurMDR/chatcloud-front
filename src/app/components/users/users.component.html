@@ -1,8 +1,9 @@
 <div class="users">
     <h3>Utilisateurs</h3>
     <div *ngFor="let user of users" class="user">
-        <span class="username" [class.is-me]="user.username === myUsername">{{user.username}}
-            <span class="generalScore">({{(user.score * 100).toFixed(2)}} %)</span>
-        </span> 
+        <span class="username" [class.is-me]="user.username === myUsername"
+            >{{ user.username }}
+            <span class="generalScore">({{ (user.score * 100).toFixed(2) }} %)</span>
+        </span>
     </div>
 </div>
