@@ -3,14 +3,11 @@
     <app-messages></app-messages>
     <app-typing></app-typing>
     <app-input></app-input>
+    <app-loader *ngIf="loader"></app-loader>
 </ng-container>
 <ng-container *ngIf="!isLoggedIn">
     <div class="login">
-        <input
-            type="text"
-            [formControl]="username"
-            placeholder="Username"
-            (keyup.enter)="login()" />
-        <div (click)="login()" class="btn">Login</div>
+        <input type="text" [formControl]="username" placeholder="Nom d'utilisateur" (keyup.enter)="login()" />
+        <div (click)="login()" class="btn">Connexion</div>
     </div>
 </ng-container>

@@ -4,7 +4,7 @@
     overflow: hidden;
     overflow-y: auto;
     border-right: 1px solid #000;
-    padding: 1em .8em;
+    padding: 1em 0.8em;
 
     .user {
         display: flex;
@@ -14,6 +14,15 @@
 
         .username {
             font-weight: bold;
+        }
+
+        .is-me {
+            color: #39796b;
+        }
+
+        .generalScore {
+            font-weight: inherit;
+            color: #002f6c;
         }
     }
 }

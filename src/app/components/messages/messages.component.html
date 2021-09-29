@@ -1,6 +1,9 @@
 <h3>Conversation</h3>
 <div class="messages" #messagesElement>
-    <div *ngFor="let message of messages" class="message">
-        <span class="username">{{message.username}}</span>{{message.message}}
+    <div *ngFor="let message of messages" class="message" [class.is-me]="message.username === myUsername">
+        <span class="username"
+            >{{ message.username }}
+            <span class="score">({{ (message.score * 100).toFixed(2) }} %)</span> </span
+        >{{ message.message }}
     </div>
 </div>
